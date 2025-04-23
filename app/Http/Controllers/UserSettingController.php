@@ -9,7 +9,6 @@ class UserSettingController extends Controller
 {
     public function index()
     {
-        // Misal ambil user dengan ID 1 dulu (untuk simulasi)
         $user = UserSetting::find(1);
 
         return view('user-setting', compact('user'));
@@ -33,7 +32,6 @@ class UserSettingController extends Controller
         $user = UserSetting::findOrFail($id);
         $user->update($data);
         $user->dob = \Carbon\Carbon::parse($user->dob)->format('Y-m-d');
-        //$user->dob = Carbon::createFromFormat('Y-m-d', $request->dob);
 
         return redirect()->back()->with('success', 'Pengaturan berhasil disimpan.');
     }

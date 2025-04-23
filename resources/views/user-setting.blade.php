@@ -147,7 +147,6 @@
     </div>
 </div>
 <script>
-    // Hapus semua 'readonly' sebelum form dikirim
     document.querySelector('form').addEventListener('submit', function () {
         document.querySelectorAll('input').forEach(input => {
             input.removeAttribute('readonly');
