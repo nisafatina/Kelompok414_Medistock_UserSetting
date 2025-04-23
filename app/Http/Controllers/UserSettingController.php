@@ -10,6 +10,9 @@ class UserSettingController extends Controller
     public function index()
     {
         $user = UserSetting::find(1);
+        if (!$user) {
+            abort(404, "UserSetting not found");
+        }
 
         return view('user-setting', compact('user'));
     }
@@ -19,9 +22,9 @@ class UserSettingController extends Controller
         $data = $request->validate([
             'username' => 'required|string',
             'email' => 'required|email',
-            'phone' => 'nullable|string',
-            'dob' => 'nullable|date',
-            'gender' => 'nullable|in:Laki Laki,Perempuan',
+            'phone' => 'required|string',
+            'dob' => 'required|date',
+            'gender' => 'required|in:Laki-laki,Perempuan',
             'two_step_verification' => 'string',
             'device' => 'nullable|string',
             'recovery_email' => 'nullable|email',
@@ -33,6 +36,7 @@ class UserSettingController extends Controller
         $user->update($data);
         $user->dob = \Carbon\Carbon::parse($user->dob)->format('Y-m-d');
 
-        return redirect()->back()->with('success', 'Pengaturan berhasil disimpan.');
+        return redirect()->route('user-setting.index')->with('success', 'Pengaturan berhasil disimpan.');
+
     }
 }

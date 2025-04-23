@@ -73,6 +73,7 @@
     </div>
 @endif
 
+
         <form method="POST" action="{{ route('user-setting.update', $user->id) }}">
             @csrf
             <div class="card">
